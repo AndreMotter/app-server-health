@@ -1,11 +1,10 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { router } from "expo-router";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   FlatList,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -22,7 +21,6 @@ export default function Usuario() {
 
   const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
-
   const [codigousuario, setCodigousuario] = useState<number | null>(null);
 
   async function ListarUsuarios() {
@@ -67,13 +65,9 @@ export default function Usuario() {
           {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              login,
-              senha: senha || undefined,
-            }),
+            body: JSON.stringify({ login, senha: senha || undefined }),
           }
         );
-
         if (!resp.ok) {
           Alert.alert("Erro", "Não foi possível alterar o usuário.");
           return;
@@ -82,12 +76,8 @@ export default function Usuario() {
         const resp = await fetch(API_BASE_URL + "/sgr-usuario/Salvar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            login,
-            senha,
-          }),
+          body: JSON.stringify({ login, senha }),
         });
-
         if (!resp.ok) {
           Alert.alert("Erro", "Não foi possível salvar o usuário.");
           return;
@@ -109,17 +99,10 @@ export default function Usuario() {
         text: "Sim",
         onPress: async () => {
           try {
-            const resp = await fetch(
-              API_BASE_URL + `/sgr-usuario/Excluir/${id}`,
-              {
-                method: "DELETE",
-              }
-            );
-
-            if (!resp.ok) {
-              Alert.alert("Erro", "Não foi possível excluir.");
-            }
-
+            const resp = await fetch(API_BASE_URL + `/sgr-usuario/Excluir/${id}`, {
+              method: "DELETE",
+            });
+            if (!resp.ok) Alert.alert("Erro", "Não foi possível excluir.");
             ListarUsuarios();
           } catch (e) {
             Alert.alert("Erro", "Não foi possível excluir.");
@@ -134,142 +117,98 @@ export default function Usuario() {
   }, []);
 
   if (modo === "lista")
-    if (modo === "lista")
-      return (
-        <View style={styles.container}>
-          <Text style={styles.titulo}>Usuários</Text>
-
-          <TouchableOpacity
-            style={stylesGlobal.button_geral}
-            onPress={() => AbrirIncluirUsuario()}
-          >
-            <Text style={stylesGlobal.buttonText_geral}>
-              <FontAwesome name="plus" size={18} /> Incluir Usuário
-            </Text>
-          </TouchableOpacity>
-
-          {loading ? (
-            <ActivityIndicator size="large" color="#1976D2" />
-          ) : (
-            <FlatList
-              data={usuarios}
-              keyExtractor={(item) => item.codigousuario.toString()}
-              renderItem={({ item }) => (
-                <View style={styles.item}>
-                  <View>
-                    <Text style={styles.itemTitulo}>
-                      {item.codigousuario} - {item.login}
-                    </Text>
-                  </View>
-
-                  <View style={styles.itemBotoes}>
-                    <TouchableOpacity onPress={() => AbrirEditarUsuario(item)}>
-                      <FontAwesome name="edit" size={22} color="#1976D2" />
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      onPress={() => ExcluirUsuario(item.codigousuario)}
-                    >
-                      <FontAwesome name="trash" size={22} color="#D32F2F" />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-            />
-          )}
-
-          <TouchableOpacity
-            style={stylesGlobal.logoutButton_geral}
-            onPress={() => router.replace("/home" as any)}
-          >
-            <FontAwesome name="arrow-left" size={18} color="#fff" />
-            <Text style={stylesGlobal.logoutText_geral}>Voltar</Text>
-          </TouchableOpacity>
-        </View>
-      );
-
-  if (modo === "novo" || modo === "editar")
     return (
-      <View style={styles.container}>
-        <Text style={styles.titulo}>
-          {modo === "editar" ? "Editar" : "Incluir"} Usuário
-        </Text>
+      <View style={stylesGlobal.container_usuario}>
+        <Text style={stylesGlobal.title_usuario}>Usuários</Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Login"
-          value={login}
-          onChangeText={setLogin}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Senha"
-          secureTextEntry
-          value={senha}
-          onChangeText={setSenha}
-        />
-
-        <TouchableOpacity style={styles.botaoSalvar} onPress={SalvarUsuario}>
-          <Text style={styles.txtBtn}>Salvar</Text>
+        <TouchableOpacity
+          style={stylesGlobal.button_geral}
+          onPress={AbrirIncluirUsuario}
+        >
+          <Text style={stylesGlobal.buttonText_geral}>
+            <FontAwesome name="plus" size={18} /> Incluir Usuário
+          </Text>
         </TouchableOpacity>
+
+        {loading ? (
+          <ActivityIndicator size="large" color="#1976D2" />
+        ) : (
+          <FlatList
+            data={usuarios}
+            keyExtractor={(item) => item.codigousuario.toString()}
+            renderItem={({ item }) => (
+              <View style={stylesGlobal.item_usuario}>
+                <View>
+                  <Text style={stylesGlobal.itemTitulo_usuario}>
+                    {item.codigousuario} - {item.login}
+                  </Text>
+                </View>
+
+                <View style={stylesGlobal.itemBotoes_usuario}>
+                  <TouchableOpacity onPress={() => AbrirEditarUsuario(item)}>
+                    <FontAwesome name="edit" size={22} color="#1976D2" />
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => ExcluirUsuario(item.codigousuario)}
+                  >
+                    <FontAwesome name="trash" size={22} color="#D32F2F" />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
+        )}
 
         <TouchableOpacity
           style={stylesGlobal.logoutButton_geral}
-          onPress={() => setModo("lista")}
+          onPress={() => router.replace("/home" as any)}
         >
           <FontAwesome name="arrow-left" size={18} color="#fff" />
           <Text style={stylesGlobal.logoutText_geral}>Voltar</Text>
         </TouchableOpacity>
       </View>
     );
+
+  if (modo === "novo" || modo === "editar")
+    return (
+      <View style={stylesGlobal.container_usuario}>
+        <Text style={stylesGlobal.title_usuario}>
+          {modo === "editar" ? "Editar" : "Incluir"} Usuário
+        </Text>
+
+      <View style={stylesGlobal.content_geral}>
+        <TextInput
+          style={stylesGlobal.input_usuario}
+          placeholder="Login"
+          value={login}
+          onChangeText={setLogin}
+        />
+
+        <TextInput
+          style={stylesGlobal.input_usuario}
+          placeholder="Senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={setSenha}
+        />
+
+        <TouchableOpacity
+          style={stylesGlobal.buttonSalvar_usuario}
+          onPress={SalvarUsuario}
+        >
+          <Text style={stylesGlobal.buttonTextSalvar_usuario}>Salvar</Text>
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity
+        style={stylesGlobal.logoutButton_geral}
+        onPress={() => setModo("lista")}
+      >
+        <FontAwesome name="arrow-left" size={18} color="#fff" />
+        <Text style={stylesGlobal.logoutText_geral}>Voltar</Text>
+      </TouchableOpacity>
+
+      </View>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, backgroundColor: "#fff" },
-
-  titulo: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-
-  item: {
-    backgroundColor: "#eee",
-    padding: 12,
-    marginBottom: 10,
-    borderRadius: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-
-  itemTitulo: { fontWeight: "bold", fontSize: 18 },
-
-  itemBotoes: { flexDirection: "row", gap: 25 },
-
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 12,
-  },
-
-  botaoSalvar: {
-    backgroundColor: "#2196F3",
-    padding: 14,
-    borderRadius: 8,
-    alignItems: "center",
-    marginVertical: 10,
-  },
-
-  botaoVoltar: {
-    backgroundColor: "#757575",
-    padding: 14,
-    borderRadius: 8,
-    alignItems: "center",
-  },
-
-  txtBtn: { color: "#fff", fontSize: 16, fontWeight: "bold" },
-});

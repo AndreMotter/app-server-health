@@ -114,5 +114,60 @@ export const stylesGlobal = StyleSheet.create({
     marginBottom: 4,
     color: "#2E7D32",
   },
-  
+
+  //USUÁRIOS
+  container_usuario: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+
+  title_usuario: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+  item_usuario: {
+    backgroundColor: "#eee",
+    padding: 12,
+    marginBottom: 10,
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  itemTitulo_usuario: {
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+
+  itemBotoes_usuario: {
+    flexDirection: "row",
+    gap: 25,
+  },
+
+  input_usuario: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+
+  buttonSalvar_usuario: {
+    backgroundColor: "#2196F3",
+    padding: 14,
+    borderRadius: 8,
+    alignItems: "center",
+    marginVertical: 10,
+  },
+
+  buttonTextSalvar_usuario: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
 });
