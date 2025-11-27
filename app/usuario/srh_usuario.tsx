@@ -1,11 +1,20 @@
 import { FontAwesome } from "@expo/vector-icons";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, Alert, FlatList, StyleSheet, Text, TextInput, TouchableOpacity, View, } from "react-native";
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { API_BASE_URL } from "../../constants/api";
 import { stylesGlobal } from "../../styles/global";
 
 export default function Usuario() {
-
   const [usuarios, setUsuarios] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -125,47 +134,59 @@ export default function Usuario() {
   }, []);
 
   if (modo === "lista")
-    return (
-      <View style={styles.container}>
-        <Text style={styles.titulo}>Usuários</Text>
+    if (modo === "lista")
+      return (
+        <View style={styles.container}>
+          <Text style={styles.titulo}>Usuários</Text>
 
-        <TouchableOpacity style={stylesGlobal.button} onPress={() => AbrirIncluirUsuario()} >
-          <Text style={stylesGlobal.buttonText}>
-            <FontAwesome name="plus" size={18} /> Incluir Usuário
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={stylesGlobal.button}
+            onPress={() => AbrirIncluirUsuario()}
+          >
+            <Text style={stylesGlobal.buttonText}>
+              <FontAwesome name="plus" size={18} /> Incluir Usuário
+            </Text>
+          </TouchableOpacity>
 
-        {loading ? (
-          <ActivityIndicator size="large" color="#1976D2" />
-        ) : (
-          <FlatList
-            data={usuarios}
-            keyExtractor={(item) => item.codigousuario.toString()}
-            renderItem={({ item }) => (
-              <View style={styles.item}>
-                <View>
-                  <Text style={styles.itemTitulo}>
-                    {item.codigousuario} - {item.login}
-                  </Text>
+          {loading ? (
+            <ActivityIndicator size="large" color="#1976D2" />
+          ) : (
+            <FlatList
+              data={usuarios}
+              keyExtractor={(item) => item.codigousuario.toString()}
+              renderItem={({ item }) => (
+                <View style={styles.item}>
+                  <View>
+                    <Text style={styles.itemTitulo}>
+                      {item.codigousuario} - {item.login}
+                    </Text>
+                  </View>
+
+                  <View style={styles.itemBotoes}>
+                    <TouchableOpacity onPress={() => AbrirEditarUsuario(item)}>
+                      <FontAwesome name="edit" size={22} color="#1976D2" />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      onPress={() => ExcluirUsuario(item.codigousuario)}
+                    >
+                      <FontAwesome name="trash" size={22} color="#D32F2F" />
+                    </TouchableOpacity>
+                  </View>
                 </View>
+              )}
+            />
+          )}
 
-                <View style={styles.itemBotoes}>
-                  <TouchableOpacity onPress={() => AbrirEditarUsuario(item)}>
-                    <FontAwesome name="edit" size={22} color="#1976D2" />
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => ExcluirUsuario(item.codigousuario)}
-                  >
-                    <FontAwesome name="trash" size={22} color="#D32F2F" />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-          />
-        )}
-      </View>
-    );
+          <TouchableOpacity
+            style={stylesGlobal.logoutButton}
+            onPress={() => router.replace("/home" as any)}
+          >
+            <FontAwesome name="arrow-left" size={18} color="#fff" />
+            <Text style={stylesGlobal.logoutText}>Voltar</Text>
+          </TouchableOpacity>
+        </View>
+      );
 
   if (modo === "novo" || modo === "editar")
     return (
@@ -174,19 +195,31 @@ export default function Usuario() {
           {modo === "editar" ? "Editar" : "Incluir"} Usuário
         </Text>
 
-        <TextInput style={styles.input} placeholder="Login" value={login} onChangeText={setLogin} />
+        <TextInput
+          style={styles.input}
+          placeholder="Login"
+          value={login}
+          onChangeText={setLogin}
+        />
 
-        <TextInput style={styles.input} placeholder="Senha" secureTextEntry value={senha} onChangeText={setSenha} />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry
+          value={senha}
+          onChangeText={setSenha}
+        />
 
         <TouchableOpacity style={styles.botaoSalvar} onPress={SalvarUsuario}>
           <Text style={styles.txtBtn}>Salvar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={styles.botaoVoltar}
+          style={stylesGlobal.logoutButton}
           onPress={() => setModo("lista")}
         >
-          <Text style={styles.txtBtn}>Voltar</Text>
+          <FontAwesome name="arrow-left" size={18} color="#fff" />
+          <Text style={stylesGlobal.logoutText}>Voltar</Text>
         </TouchableOpacity>
       </View>
     );

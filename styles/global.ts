@@ -1,8 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const stylesGlobal = StyleSheet.create({
-  
-  logo: {
+
+  // HOME
+  logo_home: {
     width: 120,
     height: 120,
     alignSelf: "center",
@@ -10,6 +11,38 @@ export const stylesGlobal = StyleSheet.create({
     resizeMode: "contain",
   },
 
+  title_home: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#2E7D32",
+    textAlign: "center",
+    marginBottom: 15,
+  },
+
+  gridContainer_home: {
+    gap: 15,
+  },
+
+  row_home: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  halfButtonLeft_home: {
+    flex: 1,
+    marginRight: 7,
+  },
+
+  halfButtonRight_home: {
+    flex: 1,
+    marginLeft: 7,
+  },
+
+  fullButton_home: {
+    width: "100%",
+  },
+
+  // GENÉRICOS
   container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
@@ -20,37 +53,6 @@ export const stylesGlobal = StyleSheet.create({
   content: {
     flexGrow: 1,
     justifyContent: "flex-start",
-  },
-
-  title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    color: "#2E7D32",
-    textAlign: "center",
-    marginBottom: 15,
-  },
-
-  gridContainer: {
-    gap: 15,
-  },
-
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-
-  halfButtonLeft: {
-    flex: 1,
-    marginRight: 7,
-  },
-
-  halfButtonRight: {
-    flex: 1,
-    marginLeft: 7,
-  },
-
-  fullButton: {
-    width: "100%",
   },
 
   button: {
@@ -93,6 +95,7 @@ export const stylesGlobal = StyleSheet.create({
     fontWeight: "bold",
   },
 
+  // LOGIN
   input_login: {
     borderWidth: 1,
     borderColor: "#A5D6A7",
@@ -111,4 +114,61 @@ export const stylesGlobal = StyleSheet.create({
     marginBottom: 4,
     color: "#2E7D32",
   },
+
+  titulo_usuario: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+
+  item_usuario: {
+    backgroundColor: "#eee",
+    padding: 12,
+    marginBottom: 10,
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  itemTitulo_usuario: {
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+
+  itemBotoes_usuario: {
+    flexDirection: "row",
+    gap: 25,
+  },
+
+  input_usuario: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 12,
+  },
+
+  botaoSalvar_usuario: {
+    backgroundColor: "#2196F3",
+    padding: 14,
+    borderRadius: 8,
+    alignItems: "center",
+    marginVertical: 10,
+  },
+
+  botaoVoltar_usuario: {
+    backgroundColor: "#757575",
+    padding: 14,
+    borderRadius: 8,
+    alignItems: "center",
+  },
+
+  txtBtn_usuario: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  
 });

@@ -19,12 +19,12 @@ export default function Home() {
 
       <View style={stylesGlobal.gridContainer_home}>
         <View style={stylesGlobal.row_home}>
-          <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.halfButtonLeft_home]} onPress={() => router.push("usuario/sgr_usuario" as any)}>
+          <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.halfButtonLeft_home]} onPress={() => router.push("usuario/srh_usuario" as any)}>
             <FontAwesome name="user-circle" size={22} color="#2E7D32" />
             <Text style={stylesGlobal.buttonText}>Usuários</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.halfButtonRight_home]} onPress={() => router.push("cultura/sgr_cultura" as any)}>
+          <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.halfButtonRight_home]} onPress={() => router.push("servidor/srh_servidor" as any)}>
             <FontAwesome name="server" size={22} color="#2E7D32" />
             <Text style={stylesGlobal.buttonText}>Servidores</Text>
           </TouchableOpacity>
