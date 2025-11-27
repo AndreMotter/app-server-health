@@ -140,10 +140,10 @@ export default function Usuario() {
           <Text style={styles.titulo}>Usuários</Text>
 
           <TouchableOpacity
-            style={stylesGlobal.button}
+            style={stylesGlobal.button_geral}
             onPress={() => AbrirIncluirUsuario()}
           >
-            <Text style={stylesGlobal.buttonText}>
+            <Text style={stylesGlobal.buttonText_geral}>
               <FontAwesome name="plus" size={18} /> Incluir Usuário
             </Text>
           </TouchableOpacity>
@@ -179,11 +179,11 @@ export default function Usuario() {
           )}
 
           <TouchableOpacity
-            style={stylesGlobal.logoutButton}
+            style={stylesGlobal.logoutButton_geral}
             onPress={() => router.replace("/home" as any)}
           >
             <FontAwesome name="arrow-left" size={18} color="#fff" />
-            <Text style={stylesGlobal.logoutText}>Voltar</Text>
+            <Text style={stylesGlobal.logoutText_geral}>Voltar</Text>
           </TouchableOpacity>
         </View>
       );
@@ -215,11 +215,11 @@ export default function Usuario() {
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={stylesGlobal.logoutButton}
+          style={stylesGlobal.logoutButton_geral}
           onPress={() => setModo("lista")}
         >
           <FontAwesome name="arrow-left" size={18} color="#fff" />
-          <Text style={stylesGlobal.logoutText}>Voltar</Text>
+          <Text style={stylesGlobal.logoutText_geral}>Voltar</Text>
         </TouchableOpacity>
       </View>
     );

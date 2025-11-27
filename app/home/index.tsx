@@ -11,7 +11,7 @@ export default function Home() {
   }
 
   return (
-    <View style={stylesGlobal.container}>
+    <View style={stylesGlobal.container_geral}>
 
       <Image source={require("../../assets/images/logo_server_health.png")} style={stylesGlobal.logo_home} />
   
@@ -19,26 +19,26 @@ export default function Home() {
 
       <View style={stylesGlobal.gridContainer_home}>
         <View style={stylesGlobal.row_home}>
-          <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.halfButtonLeft_home]} onPress={() => router.push("usuario/srh_usuario" as any)}>
+          <TouchableOpacity style={[stylesGlobal.button_geral, stylesGlobal.halfButtonLeft_home]} onPress={() => router.push("usuario/srh_usuario" as any)}>
             <FontAwesome name="user-circle" size={22} color="#2E7D32" />
-            <Text style={stylesGlobal.buttonText}>Usuários</Text>
+            <Text style={stylesGlobal.buttonText_geral}>Usuários</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.halfButtonRight_home]} onPress={() => router.push("servidor/srh_servidor" as any)}>
+          <TouchableOpacity style={[stylesGlobal.button_geral, stylesGlobal.halfButtonRight_home]} onPress={() => router.push("servidor/srh_servidor" as any)}>
             <FontAwesome name="server" size={22} color="#2E7D32" />
-            <Text style={stylesGlobal.buttonText}>Servidores</Text>
+            <Text style={stylesGlobal.buttonText_geral}>Servidores</Text>
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={[stylesGlobal.button, stylesGlobal.fullButton_home]} onPress={() => router.push("/lancamentos" as any)}>
+        <TouchableOpacity style={[stylesGlobal.button_geral, stylesGlobal.fullButton_home]} onPress={() => router.push("/lancamentos" as any)}>
           <FontAwesome name="list-alt" size={22} color="#2E7D32" />
-          <Text style={stylesGlobal.buttonText}>Leituras</Text>
+          <Text style={stylesGlobal.buttonText_geral}>Leituras</Text>
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={stylesGlobal.logoutButton} onPress={Sair}>
+      <TouchableOpacity style={stylesGlobal.logoutButton_geral} onPress={Sair}>
         <FontAwesome name="sign-out" size={18} color="#fff" />
-        <Text style={stylesGlobal.logoutText}>Sair</Text>
+        <Text style={stylesGlobal.logoutText_geral}>Sair</Text>
       </TouchableOpacity>
     </View>
   );

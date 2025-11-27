@@ -13,7 +13,7 @@ export default function Login() {
   }
 
   return (
-    <View style={[stylesGlobal.container, { justifyContent: "center", alignItems: "center" }]}>
+    <View style={[stylesGlobal.container_geral, { justifyContent: "center", alignItems: "center" }]}>
       <Image source={require("../../assets/images/logo_server_health.png")} style={stylesGlobal.logo_home} />
       <Text style={stylesGlobal.title_home}>Server Health</Text>
 
@@ -34,9 +34,9 @@ export default function Login() {
         onChangeText={setSenha}
       />
 
-      <TouchableOpacity style={stylesGlobal.button} onPress={handleEntrar}>
+      <TouchableOpacity style={stylesGlobal.button_geral} onPress={handleEntrar}>
         <FontAwesome name="sign-in" size={18} color="#2E7D32" />
-        <Text style={stylesGlobal.buttonText}>Entrar</Text>
+        <Text style={stylesGlobal.buttonText_geral}>Entrar</Text>
       </TouchableOpacity>
     </View>
   );
