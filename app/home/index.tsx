@@ -30,7 +30,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={[stylesGlobal.button_geral, stylesGlobal.fullButton_home]} onPress={() => router.push("/lancamentos" as any)}>
+        <TouchableOpacity style={[stylesGlobal.button_geral, stylesGlobal.fullButton_home]} onPress={() => router.push("leitura/srh_leitura" as any)}>
           <FontAwesome name="list-alt" size={22} color="#2E7D32" />
           <Text style={stylesGlobal.buttonText_geral}>Leituras</Text>
         </TouchableOpacity>
