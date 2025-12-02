@@ -1,4 +1,5 @@
 import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
@@ -25,7 +26,14 @@ export default function Usuario() {
 
   async function ListarUsuarios() {
     try {
-      const resp = await fetch(API_BASE_URL + "/srh-usuario/ListarTodos");
+     const token = await AsyncStorage.getItem("token");
+      const resp = await fetch(API_BASE_URL + "/srh-usuario/ListarTodos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
       const data = await resp.json();
       setUsuarios(data);
     } catch (e) {
@@ -59,12 +67,13 @@ export default function Usuario() {
       return;
     }
     try {
+        const token = await AsyncStorage.getItem("token");
       if (modo === "editar") {
         const resp = await fetch(
           API_BASE_URL + `/srh-usuario/Alterar/${codigousuario}`,
           {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", Authorization: "Bearer " + token  },
             body: JSON.stringify({ login, senha: senha || undefined }),
           }
         );
@@ -75,7 +84,7 @@ export default function Usuario() {
       } else {
         const resp = await fetch(API_BASE_URL + "/srh-usuario/Salvar", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token  },
           body: JSON.stringify({ login, senha }),
         });
         if (!resp.ok) {
@@ -93,6 +102,7 @@ export default function Usuario() {
   }
 
   async function ExcluirUsuario(id: number) {
+    const token = await AsyncStorage.getItem("token");
     Alert.alert("Excluir", "Tem certeza que deseja excluir este usuário?", [
       { text: "Cancelar" },
       {
@@ -100,7 +110,7 @@ export default function Usuario() {
         onPress: async () => {
           try {
             const resp = await fetch(API_BASE_URL + `/srh-usuario/Excluir/${id}`, {
-              method: "DELETE",
+              method: "DELETE", headers: { Authorization: "Bearer " + token }, 
             });
             if (!resp.ok) Alert.alert("Erro", "Não foi possível excluir.");
             ListarUsuarios();

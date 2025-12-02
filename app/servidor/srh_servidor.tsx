@@ -1,14 +1,15 @@
 import { FontAwesome } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    FlatList,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { API_BASE_URL } from "../../constants/api";
 import { stylesGlobal } from "../../styles/global";
@@ -25,7 +26,14 @@ export default function Servidor() {
 
   async function ListarServidores() {
     try {
-      const resp = await fetch(API_BASE_URL + "/srh-servidor/ListarTodos");
+      const token = await AsyncStorage.getItem("token");
+      const resp = await fetch(API_BASE_URL + "/srh-servidor/ListarTodos", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      });
       const data = await resp.json();
       setServidores(data);
     } catch (e) {
@@ -60,12 +68,13 @@ export default function Servidor() {
     }
 
     try {
+      const token = await AsyncStorage.getItem("token");
       if (modo === "editar") {
         const resp = await fetch(
           API_BASE_URL + `/srh-servidor/Alterar/${codigoservidor}`,
           {
             method: "PATCH",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
             body: JSON.stringify({ nome, identificador }),
           }
         );
@@ -76,7 +85,7 @@ export default function Servidor() {
       } else {
         const resp = await fetch(API_BASE_URL + "/srh-servidor/Salvar", {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
           body: JSON.stringify({ nome, identificador }),
         });
         if (!resp.ok) {
@@ -94,6 +103,7 @@ export default function Servidor() {
   }
 
   async function ExcluirServidor(id: number) {
+    const token = await AsyncStorage.getItem("token");
     Alert.alert("Excluir", "Deseja realmente excluir este servidor?", [
       { text: "Cancelar" },
       {
@@ -102,7 +112,7 @@ export default function Servidor() {
           try {
             const resp = await fetch(
               API_BASE_URL + `/srh-servidor/Excluir/${id}`,
-              { method: "DELETE" }
+              { method: "DELETE", headers: { Authorization: "Bearer " + token }, }
             );
             if (!resp.ok) {
               Alert.alert("Erro", "Não foi possível excluir.");
