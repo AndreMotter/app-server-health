@@ -25,7 +25,7 @@ export default function Usuario() {
 
   async function ListarUsuarios() {
     try {
-      const resp = await fetch(API_BASE_URL + "/sgr-usuario/ListarTodos");
+      const resp = await fetch(API_BASE_URL + "/srh-usuario/ListarTodos");
       const data = await resp.json();
       setUsuarios(data);
     } catch (e) {
@@ -38,7 +38,7 @@ export default function Usuario() {
   function AbrirEditarUsuario(item: any) {
     setCodigousuario(item.codigousuario);
     setLogin(item.login ?? "");
-    setSenha("");
+    setSenha(item.senha ?? "");
     setModo("editar");
   }
 
@@ -61,7 +61,7 @@ export default function Usuario() {
     try {
       if (modo === "editar") {
         const resp = await fetch(
-          API_BASE_URL + `/sgr-usuario/Alterar/${codigousuario}`,
+          API_BASE_URL + `/srh-usuario/Alterar/${codigousuario}`,
           {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ export default function Usuario() {
           return;
         }
       } else {
-        const resp = await fetch(API_BASE_URL + "/sgr-usuario/Salvar", {
+        const resp = await fetch(API_BASE_URL + "/srh-usuario/Salvar", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ login, senha }),
@@ -99,7 +99,7 @@ export default function Usuario() {
         text: "Sim",
         onPress: async () => {
           try {
-            const resp = await fetch(API_BASE_URL + `/sgr-usuario/Excluir/${id}`, {
+            const resp = await fetch(API_BASE_URL + `/srh-usuario/Excluir/${id}`, {
               method: "DELETE",
             });
             if (!resp.ok) Alert.alert("Erro", "Não foi possível excluir.");

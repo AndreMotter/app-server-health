@@ -127,25 +127,7 @@ export const stylesGlobal = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 20,
-  },
-
-  item_usuario: {
-    backgroundColor: "#eee",
-    padding: 12,
-    marginBottom: 10,
-    borderRadius: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-
-  itemTitulo_usuario: {
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-
-  itemBotoes_usuario: {
-    flexDirection: "row",
-    gap: 25,
+    color: "#2E7D32",       
   },
 
   input_usuario: {
@@ -154,12 +136,13 @@ export const stylesGlobal = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     marginBottom: 12,
+    backgroundColor: "#F5F5F5", 
   },
 
   buttonSalvar_usuario: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#2E7D32",
     padding: 14,
-    borderRadius: 8,
+    borderRadius: 12,
     alignItems: "center",
     marginVertical: 10,
   },
@@ -170,8 +153,30 @@ export const stylesGlobal = StyleSheet.create({
     fontWeight: "bold",
   },
 
+  item_usuario: {
+    backgroundColor: "#E8F5E9", 
+    padding: 12,
+    marginTop: 5,
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderColor: "#A5D6A7",    
+    borderWidth: 1,
+  },
+
+  itemTitulo_usuario: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "#2E7D32",         
+  },
+
+  itemBotoes_usuario: {
+    flexDirection: "row",
+    gap: 25,
+  },
+
    //SERVIDOR
-    container_servidor: {
+  container_servidor: {
     flex: 1,
     padding: 20,
     backgroundColor: "#fff",
@@ -211,7 +216,7 @@ export const stylesGlobal = StyleSheet.create({
   item_servidor: {
     backgroundColor: "#E8F5E9",
     padding: 12,
-    marginBottom: 10,
+    marginTop: 5,
     borderRadius: 8,
     flexDirection: "row",
     justifyContent: "space-between",
