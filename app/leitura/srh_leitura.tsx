@@ -1,7 +1,8 @@
 import { FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Picker } from '@react-native-picker/picker';
 import { router } from "expo-router";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
@@ -14,13 +15,35 @@ import { API_BASE_URL } from "../../constants/api";
 import { stylesGlobal } from "../../styles/global";
 
 export default function Leitura() {
-  const [leituras, setLeituras] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+
+ const [servidores, setServidores] = useState<any[]>([]); 
+
+ const [leituras, setLeituras] = useState<any[]>([]);
+ const [loading, setLoading] = useState(true);
+
+ const [codigoservidor, setCodigoServidor] = useState(0);
+
+  async function ListarServidores() {
+    try {
+      const token = await AsyncStorage.getItem("token");
+      const resp = await fetch(API_BASE_URL + "/srh-servidor/ListarTodos", {
+        headers: { Authorization: "Bearer " + token },
+      });
+      const data = await resp.json();
+      setServidores(data);
+    } catch {
+      Alert.alert("Erro", "Erro ao carregar servidores");
+    }
+  }
 
   async function ListarLeituras() {
     try {
       const token = await AsyncStorage.getItem("token");
-      const resp = await fetch(API_BASE_URL + "/srh-leitura/ListarTodos", {
+
+      const params = new URLSearchParams();
+      if (codigoservidor !== 0) params.append("codigoservidor", codigoservidor.toString());
+
+      const resp = await fetch(API_BASE_URL + `/srh-leitura/ListarTodos?${params.toString()}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -48,12 +71,31 @@ export default function Leitura() {
 
   useEffect(() => {
     ListarLeituras();
-  }, []);
+    ListarServidores();
+  }, [codigoservidor]);
 
   return (
     <View style={stylesGlobal.container_leitura}>
       <Text style={stylesGlobal.title_leitura}>Leituras de Servidores</Text>
 
+        <View style={stylesGlobal.inputPicker_geral}>
+        <Picker
+            selectedValue={codigoservidor}
+            onValueChange={(itemValue) => setCodigoServidor(itemValue)}
+            dropdownIconColor="#2E7D32"
+            style={stylesGlobal.picker_leitura}
+        >
+            <Picker.Item label="Todos os Servidores" value={0} />
+            {servidores.map((s) => (
+            <Picker.Item
+                key={s.codigoservidor}
+                label={`${s.nome} (${s.identificador})`}
+                value={s.codigoservidor}
+            />
+            ))}
+        </Picker>
+        </View>
+        
       {loading ? (
         <ActivityIndicator size="large" color="#2E7D32" />
       ) : (
