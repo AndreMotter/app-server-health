@@ -234,4 +234,65 @@ export const stylesGlobal = StyleSheet.create({
     flexDirection: "row",
     gap: 25,
   },
+
+  // LEITURAS
+  container_leitura: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#fff",
+  },
+
+  title_leitura: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+    color: "#2E7D32",
+  },
+
+  item_leitura: {
+    backgroundColor: "#E8F5E9",
+    padding: 15,
+    marginTop: 6,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderColor: "#A5D6A7",
+    borderWidth: 1,
+    alignItems: "center",
+  },
+
+  itemTitulo_leitura: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2E7D32",
+  },
+
+  subItem_leitura: {
+    color: "#555",
+    fontSize: 14,
+    marginTop: 2,
+  },
+
+  valorBox_leitura: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#C8E6C9",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+    minWidth: 60,
+  },
+
+  valor_leitura: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#2E7D32",
+  },
+
+  unidade_leitura: {
+    fontSize: 14,
+    color: "#2E7D32",
+  },
+
 });

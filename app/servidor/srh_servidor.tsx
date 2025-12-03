@@ -137,7 +137,7 @@ export default function Servidor() {
         </TouchableOpacity>
 
         {loading ? (
-          <ActivityIndicator size="large" color="#1976D2" />
+          <ActivityIndicator size="large" color="#2E7D32" />
         ) : (
           <FlatList
             data={servidores}
