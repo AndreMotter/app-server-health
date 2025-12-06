@@ -4,15 +4,16 @@ import { Picker } from '@react-native-picker/picker';
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    FlatList,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { API_BASE_URL } from "../../constants/api";
 import { stylesGlobal } from "../../styles/global";
+import { GraficoTemperatura } from "./srh_leitura_grafico";
 
 export default function Leitura() {
 
@@ -95,7 +96,9 @@ export default function Leitura() {
             ))}
         </Picker>
         </View>
-        
+      
+     <GraficoTemperatura leituras={leituras} />
+
       {loading ? (
         <ActivityIndicator size="large" color="#2E7D32" />
       ) : (
@@ -106,7 +109,10 @@ export default function Leitura() {
             <View style={stylesGlobal.item_leitura}>
               <View style={{ flex: 1 }}>
                 <Text style={stylesGlobal.itemTitulo_leitura}>
-                  {item.servidor.nome}
+                 {item.servidor.nome}
+                </Text>
+                <Text style={stylesGlobal.subItem_leitura}>
+                  Código leitura: {item.codigoleitura}
                 </Text>
                 <Text style={stylesGlobal.subItem_leitura}>
                   Identificador: {item.servidor.identificador}
