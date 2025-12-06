@@ -15,7 +15,7 @@ export function GraficoTemperatura({ leituras }: { leituras: any[] }) {
 
   return (
     <View>
-      <Text style={{ fontSize: 18, textAlign: "center", marginBottom: 10 }}>
+      <Text style={{ fontSize: 14, textAlign: "center" }}>
         Variação Temperatura (°C)
       </Text>
 
@@ -29,7 +29,7 @@ export function GraficoTemperatura({ leituras }: { leituras: any[] }) {
           ]
         }}
         width={Dimensions.get("window").width - 20}
-        height={220}
+        height={100}
         chartConfig={{
           backgroundColor: "#ffffff",
           backgroundGradientFrom: "#ffffff",
