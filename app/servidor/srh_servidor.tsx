@@ -96,26 +96,18 @@ export default function Servidor() {
 
   async function ExcluirServidor(id: number) {
     const token = await AsyncStorage.getItem("token");
-    Alert.alert("Excluir", "Deseja realmente excluir este servidor?", [
-      { text: "Cancelar" },
-      {
-        text: "Sim",
-        onPress: async () => {
-          try {
-            const resp = await fetch(
-              API_BASE_URL + `/srh-servidor/Excluir/${id}`,
-              { method: "DELETE", headers: { Authorization: "Bearer " + token }, }
-            );
-            if (!resp.ok) {
-              Alert.alert("Erro", "Não foi possível excluir.");
-            }
-            ListarServidores();
-          } catch (e) {
-            Alert.alert("Erro", "Erro ao excluir.");
-          }
-        },
-      },
-    ]);
+    try {
+      const resp = await fetch(API_BASE_URL + `/srh-servidor/Excluir/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: "Bearer " + token },
+      });
+      if (!resp.ok) {
+        Alert.alert("Erro", "Não foi possível excluir.");
+      }
+      ListarServidores();
+    } catch (e) {
+      Alert.alert("Erro", "Erro ao excluir.");
+    }
   }
 
   useEffect(() => {
